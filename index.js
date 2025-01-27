@@ -41,12 +41,19 @@ app.use('/orders', ordersRoute);
 //notification
 app.use('/api/payment', paymentRoutes);//payment
 
-// let corsOptions = {
-//     origin: 'http://localhost:3000', 
-//     optionsSuccessStatus: 200                       
-// };
 
-// app.use(cors(corsOptions));
+const allowedOrigins = ["https://milma-webapp.vercel.app/","http://localhost:3000"]; // Replace with your frontend's production URL
+
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    }
+}));
+
 
 // Start server
 app.listen(PORT, () => {
