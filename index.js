@@ -15,6 +15,10 @@ const paymentRoutes = require('./routes/payment')
 // const admin = require('firebase-admin');
 const ordersRoute = require('./routes/orders');
 
+// Load config from env file
+const app = express();
+const PORT = process.env.PORT;
+
 const allowedOrigins = [
     "https://milma-webapp.vercel.app",
     "http://localhost:3000"
@@ -37,9 +41,7 @@ app.use(cors({
 //   });
   //notification
 
-// Load config from env file
-const app = express();
-const PORT = process.env.PORT;
+
 
 // Middleware to parse JSON request body
 app.use(express.json());
