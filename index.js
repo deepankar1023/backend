@@ -14,6 +14,24 @@ const paymentRoutes = require('./routes/payment')
 //notification
 // const admin = require('firebase-admin');
 const ordersRoute = require('./routes/orders');
+
+const allowedOrigins = [
+    "https://milma-webapp.vercel.app",
+    "http://localhost:3000"
+];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    methods: "GET,POST,PUT,DELETE,OPTIONS",
+    allowedHeaders: "Content-Type,Authorization",
+    credentials: true  // Allow credentials (cookies, tokens)
+}));
 // admin.initializeApp({
 //     credential: admin.credential.cert(require('./serviceAccountKey.json')),
 //   });
@@ -44,23 +62,7 @@ app.use('/api/payment', paymentRoutes);//payment
 
 
 
-const allowedOrigins = [
-    "https://milma-webapp.vercel.app",
-    "http://localhost:3000"
-];
 
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    methods: "GET,POST,PUT,DELETE,OPTIONS",
-    allowedHeaders: "Content-Type,Authorization",
-    credentials: true  // Allow credentials (cookies, tokens)
-}));
 
 
 
