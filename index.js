@@ -20,7 +20,7 @@ const app = express();
 const PORT = process.env.PORT;
 
 const allowedOrigins = [
-    "https://milma-webapp.vercel.app",
+    "https://milma-webapp-an3m53431-deepankar1023s-projects.vercel.app/",
     "http://localhost:3000"
 ];
 
