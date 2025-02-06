@@ -19,23 +19,22 @@ const ordersRoute = require('./routes/orders');
 const app = express();
 const PORT = process.env.PORT;
 
-const allowedOrigins = [
-    "https://milma-webapp-an3m53431-deepankar1023s-projects.vercel.app/",
-    "http://localhost:3000"
-];
+const allowedOrigins = ["https://milma-webapp-an3m53431-deepankar1023s-projects.vercel.app", "http://localhost:3000"];
 
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
-            callback(new Error("Not allowed by CORS"));
+            // Allow all origins dynamically
+            callback(null, true); 
         }
     },
     methods: "GET,POST,PUT,DELETE,OPTIONS",
     allowedHeaders: "Content-Type,Authorization",
-    credentials: true  // Allow credentials (cookies, tokens)
+    credentials: true  // Required if using authentication (cookies, tokens)
 }));
+
 // admin.initializeApp({
 //     credential: admin.credential.cert(require('./serviceAccountKey.json')),
 //   });
